@@ -28,37 +28,17 @@ public class MainActivity extends ActionBarActivity {
 
         p_width=this.getWindowManager().getDefaultDisplay().getWidth();
         p_height=this.getWindowManager().getDefaultDisplay().getHeight();
-
+        
+        
+        //Start Color (The first color the user sees as it opens the app)
         int random_r = (int)Math.floor(Math.random()*257) - 1;
         int random_g = (int)Math.floor(Math.random()*257) - 1;
         int random_b = (int)Math.floor(Math.random()*257) - 1;
 
         paint_color(random_r, random_g, random_b);
     }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
+    
+    //Reads finger position
     public boolean onTouchEvent(MotionEvent event) {
         int x_forOnTouch = Math.round(event.getX());
         int y_forOnTouch = Math.round(event.getY());
@@ -67,18 +47,12 @@ public class MainActivity extends ActionBarActivity {
         paint_color(r, g, b);
 
         splash();
-
-        //TextView X_Finger = (TextView) findViewById(R.id.X_Finger);
-        //TextView Y_Finger = (TextView) findViewById(R.id.Y_Finger);
-        //TextView Z_Finger = (TextView) findViewById(R.id.Z_Finger);
-
-        //X_Finger.setText("R = " + r);
-        //Y_Finger.setText("G = " + g);
-        //Z_Finger.setText("B = " + b);
+        
         return true;
 
     }
-
+    
+    //Calculates the color depending on the coordinates
     public void box_position(int x_touch, int y_touch){
         if((x_touch >= 100) && (x_touch < p_width - 99) )
             x = x_touch - 100;
@@ -118,7 +92,8 @@ public class MainActivity extends ActionBarActivity {
                 if (g >= r)
                     b = ((r^2) + (g^2)) ^ (1/2); // Seccion 8
     }
-
+    
+    //Paints the background of the app
     public void paint_color(int r, int g, int b){
         ImageView i = (ImageView) findViewById(R.id.imageView);
         ImageView box = (ImageView) findViewById(R.id.light);
@@ -144,6 +119,7 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
+    //Removes App Name and instruction after first click
     public void splash(){
         if(s == 0) {
             //Initial Splash Screen
