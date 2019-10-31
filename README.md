@@ -14,7 +14,7 @@ Colour was done as a practice for Android Development. The idea is simple enough
 ## Screenshots:
 <div style="display: inline-flex">
 
-<img src="https://i.imgur.com/Qt1wG2J.gif" width="240">
+<img src="https://i.imgur.com/Qt1wG2J.jpg" width="240">
 
 <img src="https://i.imgur.com/kQ4374q.png" width="240">
 
