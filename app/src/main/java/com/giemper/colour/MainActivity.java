@@ -1,12 +1,9 @@
-package magdaleno.guillermo.colour;
+package com.giemper.colour;
 
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.graphics.Color;
 import android.os.Build;
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
-import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.animation.AlphaAnimation;
 import android.widget.TextView;
@@ -14,22 +11,23 @@ import android.widget.ImageView;
 import android.view.Window;
 import android.view.WindowManager;
 
-public class MainActivity extends ActionBarActivity {
-
+public class MainActivity extends AppCompatActivity
+{
     float x = 0, y = 0, z = 0, s = 0;
     int r, g, b = 0;
     public int p_width, p_height;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+//        getActionBar().hide();
 
         p_width=this.getWindowManager().getDefaultDisplay().getWidth();
         p_height=this.getWindowManager().getDefaultDisplay().getHeight();
-        
-        
+
+
         //Start Color (The first color the user sees as it opens the app)
         int random_r = (int)Math.floor(Math.random()*257) - 1;
         int random_g = (int)Math.floor(Math.random()*257) - 1;
@@ -37,7 +35,7 @@ public class MainActivity extends ActionBarActivity {
 
         paint_color(random_r, random_g, random_b);
     }
-    
+
     //Reads finger position
     public boolean onTouchEvent(MotionEvent event) {
         int x_forOnTouch = Math.round(event.getX());
@@ -47,11 +45,11 @@ public class MainActivity extends ActionBarActivity {
         paint_color(r, g, b);
 
         splash();
-        
+
         return true;
 
     }
-    
+
     //Calculates the color depending on the coordinates
     public void box_position(int x_touch, int y_touch){
         if((x_touch >= 100) && (x_touch < p_width - 99) )
@@ -74,12 +72,12 @@ public class MainActivity extends ActionBarActivity {
                 else
                     b = b/2;
             else
-                if(r <= (255 - g)) {
-                    b = 255 - b; //Seccion 4
-                    if(b < 0)
-                        b = 0;
-                }
-        else
+            if(r <= (255 - g)) {
+                b = 255 - b; //Seccion 4
+                if(b < 0)
+                    b = 0;
+            }
+            else
             if(g >= 127.5)
                 if(g <= (255 - r)) {
                     b = 255 - b; //Seccion 6
@@ -89,10 +87,10 @@ public class MainActivity extends ActionBarActivity {
                 else
                     b = ((r^2) + (g^2)) ^ (1/2); // Seccion 5
             else
-                if (g >= r)
-                    b = ((r^2) + (g^2)) ^ (1/2); // Seccion 8
+            if (g >= r)
+                b = ((r^2) + (g^2)) ^ (1/2); // Seccion 8
     }
-    
+
     //Paints the background of the app
     public void paint_color(int r, int g, int b){
         ImageView i = (ImageView) findViewById(R.id.imageView);
@@ -133,5 +131,4 @@ public class MainActivity extends ActionBarActivity {
             s++;
         }
     }
-
 }
